@@ -14,22 +14,22 @@ export default function JobSeekerList() {
                 {
             jobSeekers.map(jobSeeker=>(
                     <Card>
-                      <Image src={jobSeeker.url} size='tiny' />
+                    
                     <Card.Content>
                     <Card.Header>{jobSeeker.jobseeker.firstName} {jobSeeker.jobseeker.lastName}</Card.Header>
                     <Card.Meta>
                          <span className='date'>Birth Year:{jobSeeker.jobseeker.birthDate}</span>
                     </Card.Meta>
                    <Card.Description>
-                       İletişim {jobSeeker.jobseeker.email}
+                   <Card.Content extra>
+                   <a>
+                      <Icon name='user' />
+                      İletişim {jobSeeker.jobseeker.email}
+                    </a>
+                    </Card.Content>
                    </Card.Description>
                   </Card.Content>
-                  <Card.Content extra>
-      <a>
-        <Icon name='user' />
-        22 Friends
-      </a>
-    </Card.Content>
+                  
                  </Card>
                 ))
             }

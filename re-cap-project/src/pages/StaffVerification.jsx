@@ -3,25 +3,28 @@ import { Button, Card, Label } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import JobAdvertService from '../services/jobAdvertService'
 import '../App.css';
-import { Link } from 'react-router-dom';
-export default function JobAdvertList() {
+import swal from 'sweetalert';
+export default function StaffVerification() {
     const [jobAdverts, setJobAdverts] = useState([])
-
+   
+    const activateAdvert=function(id){
+        let jobAdvertService = new JobAdvertService;
+        jobAdvertService.activateJobAdvert(id).then(swal("Başarılı","İş ilanı aktif edildi","success"));
+        
+    }
     useEffect(() => {
         let jobAdvertService = new JobAdvertService;
-        jobAdvertService.getJobAdverts().then(result => setJobAdverts(result.data.data));
+        jobAdvertService.getNotActiveAdverts().then(result => setJobAdverts(result.data.data));
     }, [])
     return (
         <div>
-
-
             <Card.Group>
                 {
                     jobAdverts.map(jobAdvert => (
                         <Card fluid>
                             <Card.Content>
 
-                                <Card.Header><Link>{jobAdvert.employer.companyName} firması iş ilanı</Link></Card.Header>
+                                <Card.Header>{jobAdvert.employer.companyName} firması iş ilanı</Card.Header>
                                 <Card.Meta>{jobAdvert.job.title}</Card.Meta>
                                 <Card.Description>
                                     {jobAdvert.description}
@@ -49,6 +52,7 @@ export default function JobAdvertList() {
                                     {jobAdvert.workType.name}
                                     </Label>
                                 </Card.Description>
+                                <Button floated='right' onClick={e=> activateAdvert(jobAdvert.id)}>Aktifleştir</Button>
                             </Card.Content>
                         </Card>
                     ))

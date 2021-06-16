@@ -1,38 +1,21 @@
 import React, { Component } from 'react'
-import { Dropdown, Icon, Input, Menu } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { Dropdown, Icon, Input, Menu,Button } from 'semantic-ui-react'
 
-export default class SubMenu extends Component {
-  state = {}
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
-  render() {
-    const { activeItem } = this.state
+export default function SubMenu() {
 
     return (
-      <Menu vertical size='large'>
-        <Menu.Item>
-          <Input placeholder='Search...' />
-        </Menu.Item>
-
-     
+  <div>
+      <Button.Group>
+      <Link to="/jobadvert"><Button color="google plus">JobAdvertList</Button></Link>
+      <Button.Or text="ve"/>
+     <Link to="/jobseeker"> <Button color="facebook">JobSeekerList</Button></Link>
+    </Button.Group>
+    <Button.Or text="ve"/>
+    <Button.Group>
+      <Link to="/employer"><Button color="linkedin">Employer List</Button></Link>
+    </Button.Group>
+    </div>
       
-        <Menu.Item
-          name='messages'
-          active={activeItem === 'messages'}
-          onClick={this.handleItemClick}
-        >
-          Messages
-        </Menu.Item>
-
-        <Dropdown item text='More'>
-          <Dropdown.Menu>
-            <Dropdown.Item icon='edit' text='Edit Profile' />
-            <Dropdown.Item icon='globe' text='Choose Language' />
-            <Dropdown.Item icon='settings' text='Account Settings' />
-          </Dropdown.Menu>
-        </Dropdown>
-      </Menu>
     )
   }
-}
