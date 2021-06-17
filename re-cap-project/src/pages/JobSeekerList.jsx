@@ -29,11 +29,7 @@ export default function JobSeekerList() {
                     </Card.Content>
                    </Card.Description>
                   </Card.Content>
-<<<<<<< HEAD
-                  
-=======
-                
->>>>>>> 44a09fa81a60e51227aac3794b61e56094932ad6
+
                  </Card>
                 ))
             }

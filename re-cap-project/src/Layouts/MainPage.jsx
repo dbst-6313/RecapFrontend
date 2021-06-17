@@ -10,6 +10,7 @@ import JobSeekerList from '../pages/JobSeekerList.jsx'
 import Register from './Register.jsx'
 import JobAdvertAdd from '../pages/JobAdvertAdd.jsx'
 import StaffVerification from '../pages/StaffVerification.jsx'
+import StaffJobAdvertPanel from '../pages/StaffJobAdvertPanel.jsx'
 
 
 
@@ -30,6 +31,7 @@ export default function Dashboard() {
                       <Route exact path="/register" component={Register}></Route>
                       <Route exact path="/jobadvertadd" component={JobAdvertAdd}></Route>
                       <Route exact path="/staffverification" component={StaffVerification}></Route>
+                      <Route exact path="/staffjobadvertpanel" component={StaffJobAdvertPanel}></Route>
                     </GridColumn>
                 </GridRow>
             </Grid>

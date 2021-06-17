@@ -46,7 +46,7 @@ validationSchema:ValidationSchema,
           id: values.jobId
         },
         employer:{
-          userId: 13
+          userId: 15
         },
         city:{
           id: values.cityId
@@ -69,6 +69,7 @@ validationSchema:ValidationSchema,
       values.isActive = false;
       swal("Başarılı","İş ilanınız personellerimiz tarafından kontrol edildiğinde aktive edilecektir.","success");
       jobAdvertService.add(jobAdvertisementModel);
+     
     },
 
   });

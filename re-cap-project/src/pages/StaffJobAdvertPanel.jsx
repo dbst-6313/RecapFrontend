@@ -1,30 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState ,useEffect} from 'react'
 import { Button, Card, Label } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import JobAdvertService from '../services/jobAdvertService'
 import '../App.css';
 import swal from 'sweetalert';
-export default function StaffVerification() {
-    const [jobAdverts, setJobAdverts] = useState([])
+export default function StaffJobAdvertPanel() {
+    const [jobAdverts,setJobAdverts] = useState([]);
     let jobAdvertService = new JobAdvertService;
-    const activateAdvert=function(id){
-        jobAdvertService.activateJobAdvert(id).then(swal("Başarılı","İş ilanı aktif edildi","success"));
-        window.location.reload();
-    }
+    useEffect(() => {
+       jobAdvertService.getAllJobAdverts().then(result => setJobAdverts(result.data.data))
+    }, [])
     const deleteAdvert = function(id){
         swal("Uyarı","İş ilanını silmek istediğinize emin misiniz","warning").then(()=>jobAdvertService.delete(id).then(swal("Başarılı","İş ilanı başarıyla silindi","success")
         .then(setTimeout(function(){
             window.location.reload();
         }))))
-       
-    }
-    useEffect(() => {
         
-        jobAdvertService.getNotActiveAdverts().then(result => setJobAdverts(result.data.data));
-    }, [])
+    }
     return (
         <div>
-            <Card.Group>
+              <Card.Group>
                 {
                     jobAdverts.map(jobAdvert => (
                         <Card fluid>
@@ -58,7 +53,6 @@ export default function StaffVerification() {
                                     {jobAdvert.workType.name}
                                     </Label>
                                 </Card.Description>
-                                <Button floated='right' onClick={e=> activateAdvert(jobAdvert.id)}>Aktifleştir</Button>
                                 <Button floated='right' onClick={e=> deleteAdvert(jobAdvert.id)}>Sil</Button>
                             </Card.Content>
                         </Card>
