@@ -1,42 +1,80 @@
-import React, { useState } from 'react'
-import { Button, GridColumn, GridRow, Icon, Label } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css'
-import { Route } from 'react-router-dom'
-import { Grid } from 'semantic-ui-react'
-import SubMenu from './SubMenu.jsx'
-import JobAdvertList from '../pages/JobAdvertList.jsx'
-import EmployerList from '../pages/EmployerList.jsx'
-import JobSeekerList from '../pages/JobSeekerList.jsx'
-import Register from './Register.jsx'
-import JobAdvertAdd from '../pages/JobAdvertAdd.jsx'
-import StaffVerification from '../pages/StaffVerification.jsx'
-import StaffJobAdvertPanel from '../pages/StaffJobAdvertPanel.jsx'
-
-
-
-export default function Dashboard() {
-   
+import React from 'react'
+import { useHistory } from 'react-router-dom'
+import { Card, Icon, Image, Button, GridColumn, GridRow, Grid } from 'semantic-ui-react'
+export default function MainPage() {
+    let history = useHistory()
+    function pushJobAdvert() {
+        history.push("/jobadvert");
+    }
+    function pushJobSeeker() {
+        history.push("/jobseeker");
+    }
+    function pushEmployer() {
+        history.push("/employer");
+    }
     return (
         <div>
-            <Grid >
+            <Grid>
                 <GridRow>
-                    <GridColumn  width={4}>
-                        <SubMenu></SubMenu>
+                    <GridColumn width={5}>
+                        <Card>
+                            <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
+                            <Card.Content>
+                                <Card.Header>İş ilanları</Card.Header>
+                                <Card.Meta>Aktif iş ilanlarını görüntüle</Card.Meta>
+                                <Card.Description>
+                                    Bir iş arıyorsan burası tam sana göre
+                                </Card.Description>
+
+                            </Card.Content>
+                            <Card.Content extra>
+                                <a>
+                                    <Button onClick={e=>pushJobAdvert()}>İş ilanlarına git</Button>
+                                </a>
+                            </Card.Content>
+                        </Card>
+
                     </GridColumn>
-                    <GridColumn width={12}>
-                    <Route exact path="/" component={JobAdvertList}></Route>
-                      <Route exact path="/jobseeker" component={JobSeekerList}></Route>
-                      <Route exact path="/employer" component={EmployerList}></Route>
-                      <Route exact path="/jobadvert" component={JobAdvertList}></Route>
-                      <Route exact path="/register" component={Register}></Route>
-                      <Route exact path="/jobadvertadd" component={JobAdvertAdd}></Route>
-                      <Route exact path="/staffverification" component={StaffVerification}></Route>
-                      <Route exact path="/staffjobadvertpanel" component={StaffJobAdvertPanel}></Route>
+                    <GridColumn width={5}>
+                        <Card>
+                            <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
+                            <Card.Content>
+                                <Card.Header>İş arayanlar</Card.Header>
+                                <Card.Meta>İş Arayanları görüntüle</Card.Meta>
+                                <Card.Description>
+                                    İş yerin için bir kişi arıyorsan burası tam sana göre
+                                </Card.Description>
+
+                            </Card.Content>
+                            <Card.Content extra>
+                                <a>
+                                    <Button  onClick={e=>pushJobSeeker()}>İş arayanlara git</Button>
+                                </a>
+                            </Card.Content>
+                        </Card>
+                    </GridColumn>
+                    <GridColumn width={5}>
+                        <Card>
+                            <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
+                            <Card.Content>
+                                <Card.Header>İş verenler</Card.Header>
+                                <Card.Meta>İş Verenleri  görüntüle</Card.Meta>
+                                <Card.Description>
+                                    Bir iş arıyorsan burası tam sana göre
+                                </Card.Description>
+
+                            </Card.Content>
+                            <Card.Content extra>
+                                <a>
+                                    <Button  onClick={e=>pushEmployer()}>İş verenlere git</Button>
+                                </a>
+                            </Card.Content>
+                        </Card>
                     </GridColumn>
                 </GridRow>
             </Grid>
-           
-        </div> 
 
+
+        </div>
     )
 }

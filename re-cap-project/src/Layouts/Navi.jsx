@@ -16,13 +16,13 @@ let history = useHistory();
         setIsAuthenticated(true);
        }
        function pushStaffVerification(){
-           history.push("/staffverification")
+           history.push("/staff/verification")
        }
        function pushStaffAdvertPanel(){
-        history.push("/staffjobadvertpanel")
+        history.push("/staff/jobadvertpanel")
     }
     function pushCreateJobAdvert(){
-        history.push("/jobadvertadd")
+        history.push("/jobadvert/add")
     }
     return (
         <div>

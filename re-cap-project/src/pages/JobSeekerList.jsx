@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react'
-import JobSeekerImageService from '../services/jobSeekerImageService'
+import JobSeekerService from '../services/jobSeekerService'
 export default function JobSeekerList() {
     const [jobSeekers, setjobSeekers] = useState([])
 
     useEffect(() => {
-        let jobSeekerService = new JobSeekerImageService;
+        let jobSeekerService = new JobSeekerService;
         jobSeekerService.getJobSeekers().then(result => setjobSeekers(result.data.data));
     }, [])
     return (
@@ -16,15 +16,15 @@ export default function JobSeekerList() {
                     <Card>
                     
                     <Card.Content>
-                    <Card.Header>{jobSeeker.jobseeker.firstName} {jobSeeker.jobseeker.lastName}</Card.Header>
+                    <Card.Header>{jobSeeker.firstName} {jobSeeker.lastName}</Card.Header>
                     <Card.Meta>
-                         <span className='date'>Birth Year:{jobSeeker.jobseeker.birthDate}</span>
+                         <span className='date'>Birth Year:{jobSeeker.birthDate}</span>
                     </Card.Meta>
                    <Card.Description>
                    <Card.Content extra>
                    <a>
                       <Icon name='user' />
-                      İletişim {jobSeeker.jobseeker.email}
+                      İletişim {jobSeeker.email}
                     </a>
                     </Card.Content>
                    </Card.Description>

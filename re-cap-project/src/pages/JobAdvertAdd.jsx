@@ -22,7 +22,7 @@ export default function JobAdvertAdd() {
     description: Yup.string().min(75, 'Açıklamanız 75 karakter veya daha fazla olmalıdır'),
     //releaseDate: Yup.date().required(''),
     advertDeadline: Yup.date().required('advertDeadline alanı zorunlu'),
-     //isActive: Yup.boolean()
+    //isActive: Yup.boolean()
   });
 
   const formik = useFormik({
@@ -39,37 +39,37 @@ export default function JobAdvertAdd() {
       advertDeadline: '',
       isActive: '',
     },
-validationSchema:ValidationSchema,
+    validationSchema: ValidationSchema,
     onSubmit: (values) => {
       let jobAdvertisementModel = {
-        job:{
+        job: {
           id: values.jobId
         },
-        employer:{
+        employer: {
           userId: 15
         },
-        city:{
+        city: {
           id: values.cityId
         },
-        workTime:{
+        workTime: {
           id: values.workTimeId
         },
-        workType:{
-          id:values.workTypeId
+        workType: {
+          id: values.workTypeId
         },
-        description : values.description,
-        availablePositionCount : values.availablePositionCount,
-        advertDeadline : values.advertDeadline,
+        description: values.description,
+        availablePositionCount: values.availablePositionCount,
+        advertDeadline: values.advertDeadline,
         minSalary: values.minSalary,
         maxSalary: values.maxSalary,
-        active:values.isActive,
+        active: values.isActive,
       };
       let jobAdvertService = new JobAdvertService();
       values.employerId = 2;
       values.isActive = false;
-      swal("Başarılı","İş ilanınız personellerimiz tarafından kontrol edildiğinde aktive edilecektir.","success");
+      swal("Başarılı", "İş ilanınız personellerimiz tarafından kontrol edildiğinde aktive edilecektir.", "success");
       jobAdvertService.add(jobAdvertisementModel);
-     
+
     },
 
   });
@@ -192,7 +192,10 @@ validationSchema:ValidationSchema,
                   </div>
                 )}
               </Form.Field>
+              </Form.Group>
+              <Form.Group widths='equal'>
 
+              
               <Form.Field label="Uygun pozisyon sayısı" control="number">
                 <input
                   type="number"
@@ -211,8 +214,8 @@ validationSchema:ValidationSchema,
                   </div>
                 )}
               </Form.Field>
-
-            </Form.Group>
+              </Form.Group>
+            
             <Form.Group widths='equal' opt>
               <Form.Field  >
                 <label>Şehir</label>
@@ -221,7 +224,7 @@ validationSchema:ValidationSchema,
                   onChange={formik.handleChange}
                   value={formik.values.cityId}
                 >
-                   <option value="">--</option>
+                  <option value="">--</option>
                   {
 
                     cities.map(city => (
@@ -235,21 +238,23 @@ validationSchema:ValidationSchema,
                   }
                 </select>
 
+
                 {formik.errors.cityId && formik.touched.cityId && (
                   <div className={"ui pointing red basic label"}>
                     {formik.errors.cityId}
                   </div>
                 )}
               </Form.Field>
-
+            </Form.Group>
+            <Form.Group widths='equal' opt>
               <Form.Field >
-              <label>Çalışma Süresi</label>
+                <label>Çalışma Süresi</label>
                 <select
                   id="workTimeId"
                   onChange={formik.handleChange}
                   value={formik.values.workTimeId}
                 >
-                   <option value="">--</option>
+                  <option value="">--</option>
                   {
                     workTimes.map(workTime => (
                       <option
@@ -269,13 +274,13 @@ validationSchema:ValidationSchema,
               </Form.Field>
 
               <Form.Field >
-              <label>Çalışma Tipi</label>
+                <label>Çalışma Tipi</label>
                 <select
                   id="workTypeId"
                   onChange={formik.handleChange}
                   value={formik.values.workTypeId}
                 >
-                   <option value="">--</option>
+                  <option value="">--</option>
                   {
                     workTypes.map(workType => (
                       <option
@@ -292,55 +297,57 @@ validationSchema:ValidationSchema,
                     {formik.errors.workTypeId}
                   </div>
                 )}
-              </Form.Field>
 
-              <Form.Field control='date' label="Son tarih" >
-                <input type="date"
-                  id="advertDeadline"
-                  name="advertDeadline"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.advertDeadline}
-                />
-                {formik.errors.advertDeadline && formik.touched.advertDeadline && (
-                  <div className={"ui pointing red basic label"}>
-                    {formik.errors.advertDeadline}
-                  </div>
-                )}
               </Form.Field>
-
-              <Form.Field >
-              <label>İş Seçin</label>
-                <select
-                  id="jobId"
-                  onChange={formik.handleChange}
-                  value={formik.values.jobId}
-                >
-                   <option value="">--</option>
-                  {
-                    jobs.map(job => (
-                      <option
-                        key={job.id}
-                        value={job.id}
-                      >
-                        {job.title}</option>
-                    ))
-                  }
-                </select>
-                {formik.errors.jobId && formik.touched.jobId && (
-                  <div className={"ui pointing red basic label"}>
-                    {formik.errors.jobId}
-                  </div>
-                )}
-              </Form.Field>
-
             </Form.Group>
+            <Form.Group widths='equal' opt>
+            <Form.Field control='date' label="Son tarih" >
+              <input type="date"
+                id="advertDeadline"
+                name="advertDeadline"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.advertDeadline}
+              />
+              {formik.errors.advertDeadline && formik.touched.advertDeadline && (
+                <div className={"ui pointing red basic label"}>
+                  {formik.errors.advertDeadline}
+                </div>
+              )}
+            </Form.Field>
+
+            <Form.Field >
+              <label>İş Seçin</label>
+              <select
+                id="jobId"
+                onChange={formik.handleChange}
+                value={formik.values.jobId}
+              >
+                <option value="">--</option>
+                {
+                  jobs.map(job => (
+                    <option
+                      key={job.id}
+                      value={job.id}
+                    >
+                      {job.title}</option>
+                  ))
+                }
+              </select>
+              {formik.errors.jobId && formik.touched.jobId && (
+                <div className={"ui pointing red basic label"}>
+                  {formik.errors.jobId}
+                </div>
+              )}
+            </Form.Field>
+            </Form.Group>
+           
 
 
-            <Button type='submit'>Ekle</Button>
+          <Button type='submit'>Ekle</Button>
           </Form>
         </Card.Content>
       </Card>
-    </div>
+    </div >
   )
 }

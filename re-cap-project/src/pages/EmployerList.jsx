@@ -23,7 +23,7 @@ useEffect(() => {
                          <span className='date'>{employer.webAdress}</span>
                     </Card.Meta>
                    <Card.Description>
-                       Telefon Numarası {employer.phone}
+                       Telefon Numarası : {employer.phoneNumber}
                    </Card.Description>
                   </Card.Content>
                    <Card.Content extra>

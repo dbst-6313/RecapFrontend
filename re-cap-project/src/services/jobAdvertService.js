@@ -12,10 +12,22 @@ export default class JobAdvertService{
     delete(id){
         return axios.post("http://localhost:8080/api/jobadvert/deleteAdvert?id="+id)
     }
+    getById(id){
+        return axios.get("http://localhost:8080/api/jobadvert/getbyid?id="+id);
+    }
     activateJobAdvert(id){
         return axios.post("http://localhost:8080/api/jobadvert/activateAdvert?id="+id);
     }
     getNotActiveAdverts(){
         return axios.get("http://localhost:8080/api/jobadvert/getNotActiveAdverts");
+    }
+    getByCityId(id){
+        return axios.get("http://localhost:8080/api/jobadvert/getByCityId?id="+id);
+    }
+    getByWorkTypeId(id){
+        return axios.get("http://localhost:8080/api/jobadvert/getByWorkTypeId?id="+id);
+    }
+    getByWorkTypeIdAndCityId(cityId,workTypeId){
+        return axios.get("http://localhost:8080/api/jobadvert/getByCityAndWorkTypeId?cityId="+cityId+"&workTypeId="+workTypeId);
     }
 }
