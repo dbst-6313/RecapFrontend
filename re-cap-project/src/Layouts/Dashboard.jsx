@@ -15,6 +15,8 @@ import JobAdvertDetail from '../pages/JobAdvertDetail.jsx'
 import CvUpdate from '../pages/CvUpdate.jsx'
 import CvCoverLetterUpdate from '../pages/Cv/CvCoverLetterUpdate.jsx'
 import MainPage from './MainPage.jsx'
+import EmployerUpdate from '../pages/EmployerUpdate.jsx'
+import StaffEmployerPanel from '../pages/StaffEmployerPanel.jsx'
 
 
 
@@ -35,8 +37,10 @@ export default function Dashboard() {
                       <Route exact path="/jobadvert/add" component={JobAdvertAdd}></Route>
                       <Route exact path="/staff/verification" component={StaffVerification}></Route>
                       <Route exact path="/staff/jobadvertpanel" component={StaffJobAdvertPanel}></Route>
+                      <Route exact path="/staff/employerpanel" component={StaffEmployerPanel}></Route>
                       <Route exact path="/jobadvert/:id" component={JobAdvertDetail}></Route>
                       <Route exact path="/cv/update" component={CvUpdate}></Route>
+                      <Route exact path="/employer/update" component={EmployerUpdate}></Route>
                     </GridColumn>
                 </GridRow>
             </Grid>

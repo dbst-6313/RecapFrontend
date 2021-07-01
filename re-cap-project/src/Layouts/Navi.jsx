@@ -24,15 +24,19 @@ let history = useHistory();
     function pushCreateJobAdvert(){
         history.push("/jobadvert/add")
     }
+    function pushMainPage(){
+        history.push("/")
+    }
     return (
         <div>
             <Grid>
             <Menu inverted fixed="top" size='huge'>
                 <Container>
-                    
+                    <Menu.Item name="Ana Sayfa" onClick={e=>pushMainPage()}/>
                 <Menu.Item link>
                     <Dropdown text="Personel girişi" pointing="right">
                         <Dropdown.Menu >
+                       
                         <Dropdown.Item onClick={e=>pushStaffVerification()}>
                            Personel Onay
                           </Dropdown.Item>

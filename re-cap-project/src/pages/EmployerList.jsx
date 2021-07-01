@@ -32,6 +32,11 @@ useEffect(() => {
                     İletişim {employer.email}
                     </a>
                     </Card.Content>
+                    <Card.Content extra>
+                     {
+                     employer.verified?(<a></a>):(<a>Güncelleme için onay bekleniyor</a>)
+                     }
+                    </Card.Content>
                  </Card>
                 ))
                }
