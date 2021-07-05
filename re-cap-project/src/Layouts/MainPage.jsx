@@ -1,6 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { Card, Icon, Image, Button, GridColumn, GridRow, Grid } from 'semantic-ui-react'
+
 export default function MainPage() {
     let history = useHistory()
     function pushJobAdvert() {
@@ -17,7 +18,7 @@ export default function MainPage() {
             <Grid>
                 <GridRow>
                     <GridColumn width={5}>
-                        <Card>
+                        <Card >
                             <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
                             <Card.Content>
                                 <Card.Header>İş ilanları</Card.Header>

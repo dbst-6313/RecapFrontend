@@ -27,6 +27,9 @@ let history = useHistory();
     function pushMainPage(){
         history.push("/")
     }
+    function pushStaffEmployerPanel(){
+        history.push("/staff/employerpanel")
+    }
     return (
         <div>
             <Grid>
@@ -39,6 +42,9 @@ let history = useHistory();
                        
                         <Dropdown.Item onClick={e=>pushStaffVerification()}>
                            Personel Onay
+                          </Dropdown.Item>
+                          <Dropdown.Item onClick={e=>pushStaffEmployerPanel()}>
+                           Personel İş veren Paneli
                           </Dropdown.Item>
                           <Dropdown.Item onClick={e=>pushStaffAdvertPanel()}>
                            Personel İş ilanı paneli

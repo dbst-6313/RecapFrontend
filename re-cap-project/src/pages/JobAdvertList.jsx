@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Card, GridColumn, GridRow, Label, Grid, Rating, Select, Form } from 'semantic-ui-react'
+import { Button, Card, GridColumn, GridRow, Label, Grid, Rating, Form ,Pagination} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import JobAdvertService from '../services/jobAdvertService'
 import FavoriteService from '../services/favoriteService'
@@ -14,17 +14,24 @@ export default function JobAdvertList() {
     const [jobSeeker, setJobSeeker] = useState([])
     const [cities, setCities] = useState([]);
     const [workTypes, setWorkTypes] = useState([]);
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(2);
+
+    let jobAdvertService = new JobAdvertService;
     useEffect(() => {
-        let jobAdvertService = new JobAdvertService;
+   
         let jobSeekerService = new JobSeekerService;
         let cityService = new CityService;
         let workTypeService = new WorkTypeService;
 
         workTypeService.getWorkType().then(result => setWorkTypes(result.data.data))
         cityService.getCities().then(result => setCities(result.data.data));
-        jobAdvertService.getJobAdverts().then(result => setJobAdverts(result.data.data));
+        jobAdvertService.getJobAdverts(page,pageSize).then(result => setJobAdverts(result.data.data));
         jobSeekerService.getJobSeekerById(4).then(result => setJobSeeker(result.data.data));
+     
+
     }, [])
+
     const cityOptions = cities.map((city, index) => ({
         key: index,
         text: city.name,
@@ -54,21 +61,33 @@ export default function JobAdvertList() {
         ,
         onSubmit: values => {
             let jobAdvertService = new JobAdvertService;
-           if(values.cityId == "" && values.workTypeId != ""){
-            jobAdvertService.getByWorkTypeId(values.workTypeId).then(result => setJobAdverts(result.data.data));
-           }
-           else if(values.workTypeId == ""&& values.cityId != ""){
-            jobAdvertService.getByCityId(values.cityId).then(result => setJobAdverts(result.data.data));
-           }
-           else{
-            jobAdvertService.getByWorkTypeIdAndCityId(values.cityId,values.workTypeId).then(result => setJobAdverts(result.data.data));
-           }
+            if (values.cityId == "" && values.workTypeId != "") {
+                jobAdvertService.getByWorkTypeId(values.workTypeId).then(result => setJobAdverts(result.data.data));
+            }
+            else if (values.workTypeId == "" && values.cityId != "") {
+                jobAdvertService.getByCityId(values.cityId).then(result => setJobAdverts(result.data.data));
+            }
+            else {
+                jobAdvertService.getByWorkTypeIdAndCityId(values.cityId, values.workTypeId).then(result => setJobAdverts(result.data.data));
+            }
         }
     })
-    function getJobAdverts(){
+    function getJobAdverts() {
         let jobAdvertService = new JobAdvertService;
         jobAdvertService.getJobAdverts().then(result => setJobAdverts(result.data.data));
     }
+    const handleChangePageSize = (value) => {
+        let jobAdvertService = new JobAdvertService;
+        setPageSize(value);
+        jobAdvertService.getJobAdverts().then(result => setJobAdverts(result.data.data));
+      };
+
+      function handleChangePage(page) {
+        let jobAdvertService = new JobAdvertService;
+        setPage(page);
+        jobAdvertService.getJobAdverts(page,pageSize).then(result => setJobAdverts(result.data.data));
+      }
+    
     return (
         <div>
             <Grid>
@@ -114,10 +133,10 @@ export default function JobAdvertList() {
                                     }
                                 </select>
                             </Card>
-                            <Button color="vk" type='submit' fluid style={{ marginTop: "20px" ,marginBottom:"15px"}} >Filtrele</Button>
-                            
+                            <Button color="vk" type='submit' fluid style={{ marginTop: "20px", marginBottom: "15px" }} >Filtrele</Button>
+
                         </Form>
-                        <Button content='Filtreleri sıfırla' icon='right arrow' labelPosition='left' onClick={e=>getJobAdverts()}  floated="left"/>
+                        <Button content='Filtreleri sıfırla' icon='right arrow' labelPosition='left' onClick={e => getJobAdverts()} floated="left" />
                     </GridColumn>
                     <GridColumn width={12}>
                         <Card.Group>
@@ -164,6 +183,13 @@ export default function JobAdvertList() {
                                 ))
                             }
                         </Card.Group>
+                        <Pagination
+                            defaultActivePage={page}
+                            onPageChange={(e, data) => {
+                              handleChangePage(data.activePage);
+                            }}
+                            totalPages={10}
+                        />
                     </GridColumn>
                 </GridRow>
             </Grid>

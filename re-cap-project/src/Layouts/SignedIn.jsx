@@ -7,6 +7,9 @@ export default function SignIn(props) {
     function pushCvUpdate(){  
         history.push("/cv/update")
     }
+    function pushEmployerUpdate(){  
+        history.push("/employer/update")
+    }
     return (
         <div>
         <Menu.Item>
@@ -15,6 +18,7 @@ export default function SignIn(props) {
               <Dropdown.Menu>
                   <Dropdown.Item text="Bilgilerim" icon="info"/>
                   <Dropdown.Item text="Cv Güncelle" onClick={e=>pushCvUpdate()} icon="heart"/>
+                  <Dropdown.Item text="Firma bilgilerini Güncelle" onClick={e=>pushEmployerUpdate()} icon="heart"/>
                   <Dropdown.Item onClick={props.signOut} text="Çıkış yap" icon="sign-out"/>
               </Dropdown.Menu>
           </Dropdown>
