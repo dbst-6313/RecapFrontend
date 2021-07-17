@@ -30,4 +30,7 @@ export default class JobAdvertService{
     getByWorkTypeIdAndCityId(cityId,workTypeId){
         return axios.get("http://localhost:8080/api/jobadvert/getByCityAndWorkTypeId?cityId="+cityId+"&workTypeId="+workTypeId);
     }
+    getActiveAdvertsCount(){
+        return axios.get("http://localhost:8080/api/jobadvert/getActiveAdvertsCount");
+    }
 }

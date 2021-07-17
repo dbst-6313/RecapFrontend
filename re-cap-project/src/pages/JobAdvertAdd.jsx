@@ -8,20 +8,21 @@ import WorkTimeService from '../services/workTimeService';
 import CityService from '../services/cityService';
 import JobService from '../services/jobService';
 import swal from 'sweetalert';
+import { ADVERT_DEADLINE_FIELD_REQUIRED, AVAILABLE_POSITION_FIELD_REQUIRED, CITY_ID_FIELD_REQUIRED, DESCRIPTION_FIELD_REQUIRED, DESCRIPTION_MIN_LENGTH, JOB_ID_FIELD_REQUIRED, MAX_SALARY_FIELD_REQUIRED, MIN_SALARY_FIELD_REQUIRED, WORK_TIME_ID_FIELD_REQUIRED, WORK_TYPE_ID_FIELD_REQUIRED } from "../constants/yuprequired/yupRequiredTexts";
 export default function JobAdvertAdd() {
   const ValidationSchema = Yup.object().shape({
     // id: Yup.number().required('Id alanı Zorunlu'),
-    jobId: Yup.number().required('jobId alanı Zorunlu'),
-    cityId: Yup.number().required('cityId alanı Zorunlu'),
+    jobId: Yup.number().required(JOB_ID_FIELD_REQUIRED),
+    cityId: Yup.number().required(CITY_ID_FIELD_REQUIRED),
     //employerId: Yup.number() .required('employerId alanı Zorunlu'),
-    workTypeId: Yup.number().required('workTypeId alanı Zorunlu'),
-    workTimeId: Yup.number().required('workTimeId alanı Zorunlu'),
-    availablePositionCount: Yup.number().required('availablePositionCount alanı zorunlu'),
-    maxSalary: Yup.number().required('maxSalary alanı zorunlu'),
-    minSalary: Yup.number().required('minSalary alanı zorunlu'),
-    description: Yup.string().min(75, 'Açıklamanız 75 karakter veya daha fazla olmalıdır'),
+    workTypeId: Yup.number().required(WORK_TYPE_ID_FIELD_REQUIRED),
+    workTimeId: Yup.number().required(WORK_TIME_ID_FIELD_REQUIRED),
+    availablePositionCount: Yup.number().required(AVAILABLE_POSITION_FIELD_REQUIRED),
+    maxSalary: Yup.number().required(MAX_SALARY_FIELD_REQUIRED),
+    minSalary: Yup.number().required(MIN_SALARY_FIELD_REQUIRED),
+    description: Yup.string().min(75, DESCRIPTION_MIN_LENGTH).required(DESCRIPTION_FIELD_REQUIRED),
     //releaseDate: Yup.date().required(''),
-    advertDeadline: Yup.date().required('advertDeadline alanı zorunlu'),
+    advertDeadline: Yup.date().required(ADVERT_DEADLINE_FIELD_REQUIRED),
     //isActive: Yup.boolean()
   });
 

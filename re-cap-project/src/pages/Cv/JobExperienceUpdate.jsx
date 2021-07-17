@@ -5,11 +5,12 @@ import JobExperienceService from '../../services/jobExperienceService';
 import JobSeekerService from '../../services/jobSeekerService';
 import swal from 'sweetalert';
 import { Button, Card, Form, Select } from "semantic-ui-react";
+
 export default function JobExperienceUpdate() {
 
     let jobExperienceService = new JobExperienceService;
     const validation = Yup.object().shape({
-        companyExperience: Yup.string().required("CompanyExperience Alanı zorunlu"),
+        companyExperience: Yup.string().required("İş tecrübesi alanı zorunlu"),
         experienceStartDate: Yup.date().required("ExperienceStart Alanı zorunlu"),
         experienceEndDate: Yup.date(),
         experiencePosition: Yup.string().required("experiencePosition Alanı zorunlu"),

@@ -18,7 +18,7 @@ export default function StaffEmployerPanel() {
         let employerService = new EmployerService;
         let verificationPendingEmployerService = new VerificationPendingEmployerService;
         verificationPendingEmployerService.delete(employer);
-        swal("Başarılı", "Aktive edildi", "success");
+     
         let employerModel={
             userId: employer.userId,
             companyName: employer.companyName,
@@ -31,7 +31,11 @@ export default function StaffEmployerPanel() {
         }
         employerService.updateEmployer(employerModel)
         verificationPendingEmployerService.getAll().then(result => setVerificationPendingEmployers(result.data.data));
-
+        swal("Başarılı", "Aktive edildi", "success");
+        setTimeout(function(){
+            window.location.reload(false);
+        },1500)
+        
     }
     return (
         <div>

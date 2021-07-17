@@ -15,15 +15,15 @@ export default function JobAdvertList() {
     const [cities, setCities] = useState([]);
     const [workTypes, setWorkTypes] = useState([]);
     const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(2);
-
+    const [pageSize, setPageSize] = useState(10);
+    const [totalPage,setTotalPage] = useState({});
     let jobAdvertService = new JobAdvertService;
     useEffect(() => {
    
         let jobSeekerService = new JobSeekerService;
         let cityService = new CityService;
         let workTypeService = new WorkTypeService;
-
+           jobAdvertService.getActiveAdvertsCount().then(result=>setTotalPage(result.data/pageSize))
         workTypeService.getWorkType().then(result => setWorkTypes(result.data.data))
         cityService.getCities().then(result => setCities(result.data.data));
         jobAdvertService.getJobAdverts(page,pageSize).then(result => setJobAdverts(result.data.data));
@@ -32,16 +32,6 @@ export default function JobAdvertList() {
 
     }, [])
 
-    const cityOptions = cities.map((city, index) => ({
-        key: index,
-        text: city.name,
-        value: city.id,
-    }));
-    const workTypeOptions = workTypes.map((workType, index) => ({
-        key: index,
-        text: workType.name,
-        value: workType.id,
-    }));
     function addFavorite(jobAdvert) {
         let favoriteService = new FavoriteService;
 
@@ -75,12 +65,8 @@ export default function JobAdvertList() {
     function getJobAdverts() {
         let jobAdvertService = new JobAdvertService;
         jobAdvertService.getJobAdverts().then(result => setJobAdverts(result.data.data));
+        window.location.reload(false);
     }
-    const handleChangePageSize = (value) => {
-        let jobAdvertService = new JobAdvertService;
-        setPageSize(value);
-        jobAdvertService.getJobAdverts().then(result => setJobAdverts(result.data.data));
-      };
 
       function handleChangePage(page) {
         let jobAdvertService = new JobAdvertService;
@@ -188,7 +174,7 @@ export default function JobAdvertList() {
                             onPageChange={(e, data) => {
                               handleChangePage(data.activePage);
                             }}
-                            totalPages={10}
+                            totalPages={totalPage}
                         />
                     </GridColumn>
                 </GridRow>

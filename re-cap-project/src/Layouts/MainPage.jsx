@@ -19,7 +19,7 @@ export default function MainPage() {
                 <GridRow>
                     <GridColumn width={5}>
                         <Card >
-                            <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
+                            <Image src='https://cdn.discordapp.com/attachments/690890890448732230/865218580152844318/wewantyou.PNG' wrapped ui={false} />
                             <Card.Content>
                                 <Card.Header>İş ilanları</Card.Header>
                                 <Card.Meta>Aktif iş ilanlarını görüntüle</Card.Meta>
@@ -38,7 +38,7 @@ export default function MainPage() {
                     </GridColumn>
                     <GridColumn width={5}>
                         <Card>
-                            <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
+                            <Image src='https://cdn.discordapp.com/attachments/690890890448732230/865219285307097118/hire-me-sign.jpg' wrapped ui={false} />
                             <Card.Content>
                                 <Card.Header>İş arayanlar</Card.Header>
                                 <Card.Meta>İş Arayanları görüntüle</Card.Meta>
@@ -56,7 +56,7 @@ export default function MainPage() {
                     </GridColumn>
                     <GridColumn width={5}>
                         <Card>
-                            <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
+                            <Image src='https://cdn.discordapp.com/attachments/690890890448732230/865219466858463232/employer.jpg' wrapped ui={false} />
                             <Card.Content>
                                 <Card.Header>İş verenler</Card.Header>
                                 <Card.Meta>İş Verenleri  görüntüle</Card.Meta>

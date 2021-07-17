@@ -6,11 +6,12 @@ import swal from 'sweetalert';
 import CvCoverLetterService from '../../services/cvCoverLetterService';
 import JobSeekerService from '../../services/jobSeekerService';
 
+
 export default function CvCoverLetterUpdate() {
  
     let cvCoverLetterService =new CvCoverLetterService;
     const validation = Yup.object().shape({
-        coverLetter: Yup.string().required("CoverLetter Alanı zorunlu")
+        coverLetter: Yup.string().required("Ön yazı alanı zorunlu")
     });
     const formik = useFormik({
         initialValues: {

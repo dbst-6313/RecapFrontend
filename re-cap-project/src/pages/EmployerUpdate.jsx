@@ -5,19 +5,21 @@ import * as Yup from 'yup';
 import { Button, Card, Form, Select } from "semantic-ui-react";
 import swal from 'sweetalert';
 import EmployerService from '../services/employerService';
+import { COMPANY_NAME_FIELD_REQUIRED, EMAIL_FIELD_REQUIRED, PASSWORD_CHECK_FIELD_REQUIRED, PASSWORD_FIELD_REQUIRED, PHONE_FIELD_REQUIRED, WEB_ADRESS_FIELD_REQUIRED } from '../constants/yuprequired/yupRequiredTexts';
 export default function EmployerUpdate() {
     const [employer,setEmployer] = useState({});
+   
     useEffect(() => {
         let employerService = new EmployerService;
         employerService.getEmployerById(13).then(result=>setEmployer(result.data.data))
     }, [])
     const validationYup = Yup.object().shape({
-          companyName:Yup.string().required("companyName ALANI ZORUNLU"),
-          email:Yup.string().required("Email alanı zorunlu"),
-          password:Yup.string().required("password alanı zorunlu"),
-          passwordCheck:Yup.string().required("passwordCheck alanı zorunlu"),
-          webAdress:Yup.string().required("Web addres alanı zorunlu"),
-          phoneNumber:Yup.string().required("Phonenumber alanı zorunlu")
+          companyName:Yup.string().required(COMPANY_NAME_FIELD_REQUIRED),
+          email:Yup.string().required(EMAIL_FIELD_REQUIRED),
+          password:Yup.string().required(PASSWORD_FIELD_REQUIRED),
+          passwordCheck:Yup.string().required(PASSWORD_CHECK_FIELD_REQUIRED),
+          webAdress:Yup.string().required(WEB_ADRESS_FIELD_REQUIRED),
+          phoneNumber:Yup.string().required(PHONE_FIELD_REQUIRED)
     })
     const formik = useFormik({
         initialValues: {
@@ -46,7 +48,14 @@ export default function EmployerUpdate() {
                 webAdress: values.webAdress
             }
             
-           verificationPendingEmployerService.add(VerificationPendingEmployerModel).then(swal("Başarılı","Kayıt alındı bilgileriniz personellerimiz tarafından onaylandığında güncellenecektir","success"))
+            verificationPendingEmployerService.add(VerificationPendingEmployerModel)
+                
+           
+                    swal("Başarılı","Kayıt alındı bilgileriniz personellerimiz tarafından onaylandığında güncellenecektir","success")
+
+                 
+           
+           
         }
     })
     return (
