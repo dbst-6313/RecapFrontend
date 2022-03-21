@@ -1,0 +1,699 @@
+<div class="collapse" id="navbarToggleExternalContent">
+  <div class="bg-dark p-4">
+    <h5 class="text-white h4">Admin işlemleri</h5>
+    <span (click)="setCurrentNumber(2)" style="cursor: pointer" class="text-muted">Blog ekleme</span>
+  </div>
+  <div class="bg-dark p-4">
+    <span (click)="setCurrentNumber(5)" style="cursor: pointer" class="text-muted">Bloglar</span>
+  </div>
+  <div class="bg-dark p-4">
+    <span (click)="setCurrentNumber(3)" style="cursor: pointer" class="text-muted">İlan ekleme</span>
+  </div>
+
+  <div class="bg-dark p-4">
+    <span (click)="setCurrentNumber(4)" style="cursor: pointer" class="text-muted">İlanlar</span>
+  </div>
+  <div class="bg-dark p-4">
+    <span (click)="setCurrentNumber(6)" style="cursor: pointer" class="text-muted">Emlakçı ekleme</span>
+  </div>
+  <div class="bg-dark p-4">
+    <span (click)="setCurrentNumber(7)" style="cursor: pointer" class="text-muted">Emlakçılar</span>
+  </div>
+</div>
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent"
+      aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+
+<div *ngIf="currentNumber == 5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>Bloglar</h4>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Başlık</th>
+                  <th>İd</th>
+                  <th>Kısa Açıklama</th>
+                  <th>Eklenme Tarihi</th>
+                  <th>Güncellenme Tarihi</th>
+                  <th>Kategori</th>
+                  <th>Görüntülenme</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of blogs">
+                  <td>{{ item.header }}</td>
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.shortText }}</td>
+                  <td>{{ item.addDate | date }}</td>
+                  <td>{{ item.categoryName }}</td>
+                  <td>{{ item.view }}</td>
+                  <td>
+                    <button class="btn btn-info" routerLink="/blog-detail/{{ item.id }}">
+                      Ayrıntı
+                    </button>
+                  </td>
+                  <td>
+                    <button class="btn btn-info" routerLink="/admin/blog-detail/{{ item.id }}">
+                      Güncelle
+                    </button>
+                  </td>
+                  <td>
+                    <button class="btn btn-danger" (click)="setCurrentBlog(item)" (click)="blogDelete()">
+                      Sil
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="currentNumber == 4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>İlanlar</h4>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Başlık</th>
+                  <th>İd</th>
+                  <th>Açıklama</th>
+                  <th>Detaylı Açıklama</th>
+                  <th>Kısa Açıklama</th>
+                  <th>Fiyat</th>
+                  <th>Şehir</th>
+                  <th>Video link</th>
+                  <th>Kategori</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of adverts">
+                  <td>{{ item.title }}</td>
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.description }}</td>
+                  <td style=" white-space: nowrap;
+                  width: 50px;
+                  height: 50px;
+                  overflow: hidden;
+                  text-overflow: ellipsis; ">{{ item.detailDescription }}</td>
+                  <td>{{ item.shortDescription }}</td>
+                  <td>{{ item.price }}</td>
+                  <td>{{ item.city }}</td>
+                  <td>{{ item.youtubeVideoLink }}</td>
+                  <td>{{ item.advertCategoryName }}</td>
+                  <td>
+                    <button class="btn btn-info" routerLink="/property-detail/{{ item.id }}">
+                      Ayrıntı
+                    </button>
+                  </td>
+                  <td>
+                    <button class="btn btn-info" routerLink="/admin/advert-detail/{{ item.id }}">
+                      Güncelle
+                    </button>
+                  </td>
+                  <td>
+                    <button class="btn btn-danger" (click)="setCurrentAdvert(item)" (click)="advertDelete()">
+                      Sil
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="currentNumber == 7">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>İlanlar</h4>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>İsim</th>
+                  <th>Rolü</th>
+                  <th>Ofis Numarası</th>
+                  <th>Telefon Numarası</th>
+                  <th>Mail</th>
+                  <th>Linkedin</th>
+                  <th>Twitter</th>
+                  <th>Instagram</th>
+                  <th>Youtube</th>
+                  <th>Açıklama</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of agents">
+                  <td>{{ item?.name }}</td>
+                  <td>{{ item?.role }}</td>
+                  <td>{{ item?.officeNumber }}</td>
+                  <td style=" white-space: nowrap;
+                  width: 50px;
+                  height: 50px;
+                  overflow: hidden;
+                  text-overflow: ellipsis; ">{{ item?.description }}</td>
+                  <td>{{ item?.mobileNumber }}</td>
+                  <td>{{ item?.linkedinLink }}</td>
+                  <td>{{ item?.youtubeLink }}</td>
+                  <td>{{ item?.instagramLink }}</td>
+                  <td>{{ item?.twitterLink }}</td>
+                  <td>{{ item?.email }}</td>
+                  <td>
+                    <button class="btn btn-info" routerLink="/property-detail/{{ item.id }}">
+                      Ayrıntı
+                    </button>
+                  </td>
+                  <td>
+                    <button class="btn btn-info" routerLink="/admin/advert-detail/{{ item.id }}">
+                      Güncelle
+                    </button>
+                  </td>
+                  <td>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="currentNumber == 6">
+
+
+  <form [formGroup]="agentForm">
+    <div class="mb-3">
+      <label for="name">İsim</label>
+      <div class="form-group">
+        <input type="text" id="name" formControlName="name" class="form-control" placeholder="Başlık" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="role">Rolü</label>
+      <div class="form-group">
+        <input type="text" id="role" formControlName="role" class="form-control"
+          placeholder="Kısa açıklama" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="mobileNumber">Telefon Numarası</label>
+      <div class="form-group">
+        <input type="text" id="mobileNumber" formControlName="mobileNumber" class="form-control" placeholder="Kısa açıklama" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="officeNumber">Ofis Telefon Numarasu</label>
+      <div class="form-group">
+        <input type="text" id="officeNumber" formControlName="officeNumber" class="form-control"
+          placeholder="Kısa açıklama" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="email">Mail</label>
+      <div class="form-group">
+        <input type="text" id="email" formControlName="email" class="form-control" placeholder="Kısa açıklama" />
+      </div>
+    </div>
+
+    <!-- <div class="mb-3">
+  <label for="description">Açıklama</label>
+  <div class="form-group">
+      <input type="text" id="description" formControlName="description" class="form-control" placeholder="Kısa açıklama" />
+  </div>
+</div> -->
+
+    <div class="mb-3">
+      <label for="linkedinLink">LinkedinLink</label>
+      <div class="form-group">
+        <input type="text" id="linkedinLink" formControlName="linkedinLink" class="form-control"
+          placeholder="Kısa açıklama" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="twitterLink">twitterLink</label>
+      <div class="form-group">
+        <input type="text" id="twitterLink" formControlName="twitterLink" class="form-control"
+          placeholder="Kısa açıklama" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="instagramLink">İnstagram Link</label>
+      <div class="form-group">
+        <input type="text" id="instagramLink" formControlName="instagramLink" class="form-control" placeholder="Kısa açıklama" />
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="youtubeLink">Youtube Link</label>
+      <div class="form-group">
+        <input type="text" id="youtubeLink" formControlName="youtubeLink" class="form-control" placeholder="Kısa açıklama" />
+      </div>
+    </div> <div class="mb-3">
+      <label for="description">Açıklama</label>
+      <div class="form-group">
+        <input type="text" id="description" formControlName="description" class="form-control" placeholder="Kısa açıklama" />
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-fill btn-info" (click)="back()">Geri dön</button>
+        <button class="btn btn-fill btn-success" (click)="agentAdd()" style="float: right">
+          Ekle
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="currentNumber == 3">
+  <ejs-richtexteditor id="defaultRTE" #editor [toolbarSettings]="tools">
+    <ng-template #valueTemplate>
+      <div class="single__detail-features">
+        <h6 class="text-capitalize detail-heading"></h6>
+        <!-- INFO PROPERTY DETAIL -->
+        <div class="property__detail-info">
+          <div class="row">
+            <div class="col-md-6 col-lg-6">
+              <ul class="property__detail-info-list list-unstyled">
+                <li><b>Property ID:</b> RV151</li>
+                <li><b>Price:</b> $484,400</li>
+                <li><b>Property Size:</b> 1466 Sq Ft</li>
+                <li><b>Bedrooms:</b> 4</li>
+                <li><b>Bathrooms:</b> 2</li>
+              </ul>
+            </div>
+            <div class="col-md-6 col-lg-6">
+              <ul class="property__detail-info-list list-unstyled">
+                <li><b>Garage:</b> 1</li>
+                <li><b>Garage Size:</b> 458 SqFt</li>
+                <li><b>Year Built:</b> 2019-01-09</li>
+                <li><b>Property Type:</b> Full Family Home</li>
+                <li><b>Property Status:</b> For rent</li>
+              </ul>
+            </div>
+          </div>
+          <h6 class="text-primary"></h6>
+          <div class="row">
+            <div class="col-md-6 col-lg-6">
+              <ul class="property__detail-info-list list-unstyled">
+                <li><b>Property ID:</b> RV151</li>
+                <li><b>Price:</b> $484,400</li>
+                <li><b>Property Size:</b> 1466 Sq Ft</li>
+                <li><b>Bedrooms:</b> 4</li>
+                <li><b>Bathrooms:</b> 2</li>
+              </ul>
+            </div>
+            <div class="col-md-6 col-lg-6">
+              <ul class="property__detail-info-list list-unstyled">
+                <li><b>Garage:</b> 1</li>
+                <li><b>Garage Size:</b> 458 SqFt</li>
+                <li><b>Year Built:</b> 2019-01-09</li>
+                <li><b>Property Type:</b> Full Family Home</li>
+                <li><b>Property Status:</b> For rent</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- END INFO PROPERTY DETAIL -->
+      </div>
+      <!-- END PROPERTY DETAILS SPEC -->
+      <div class="clearfix"></div>
+
+      <!-- FEATURES -->
+
+      <!-- END FEATURES -->
+
+      <!-- FLOR PLAN -->
+      <div class="single__detail-features">
+        <h6 class="text-capitalize detail-heading"></h6>
+        <!-- FLOR PLAN IMAGE -->
+        <div id="accordion" class="floorplan" role="tablist">
+          <div class="card">
+            <div class="card-header" role="tab" id="headingOne">
+              <a class="text-capitalize" data-toggle="collapse" href="#collapseOne" aria-expanded="true"
+                aria-controls="collapseOne">
+                first floor
+                <span class="badge badge-light rounded p-1 ml-2">460 sq ft</span>
+              </a>
+            </div>
+            <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne"
+              data-parent="#accordion">
+              <div class="card-body">
+                <figure>
+                  <img src="images/floorplan.jpg" alt="" class="img-fluid" />
+                </figure>
+
+                Excepteur sint ocaec at cupdatat proident suntin culpa qui
+                officia deserunt mol anim id esa laborum perspiciat. Duis aute
+                irure dolor reprehenderit in voluptate velit essle cillum dolore
+                eu fugiat nulla pariatur.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" role="tab" id="headingTwo">
+              <a>
+                second floor
+                <span class="badge badge-light rounded p-1 ml-2">460 sq ft</span>
+              </a>
+            </div>
+            <div>
+              <div class="card-body">
+                <figure>
+                  <img src="images/floorplan2.jpg" alt="" class="img-fluid" />
+                </figure>
+                They offers a host of logistic management services and supply
+                chain . We provide innovative solutions with the best. tempor
+                incididunt ut labore et dolor empor tempor incididunt innovative
+                solutions
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" role="tab" id="headingThree">
+              <a>
+                garage
+                <span class="badge badge-light rounded p-1 ml-2">460 sq ft</span>
+              </a>
+            </div>
+            <div>
+              <div class="card-body">
+                <figure>
+                  <img src="images/floorplan3.jpg" alt="" class="img-fluid" />
+                </figure>
+                They offers a host of logistic management services and supply
+                chain . We provide innovative solutions with the best. tempor
+                incididunt ut labore et dolor empor tempor incididunt innovative
+                solutions
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ejs-richtexteditor>
+
+  <form [formGroup]="advertForm">
+    <div class="mb-3">
+      <label for="title">Başlık</label>
+      <div class="form-group">
+        <input type="text" id="title" formControlName="title" class="form-control" placeholder="Başlık" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="shortDescription">Kısa açıklama</label>
+      <div class="form-group">
+        <input type="text" id="shortDescription" formControlName="shortDescription" class="form-control"
+          placeholder="Kısa açıklama" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="price">Fiyat</label>
+      <div class="form-group">
+        <input type="number" id="price" formControlName="price" class="form-control" placeholder="Kısa açıklama" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="buildTime">Yapım tarihi</label>
+      <div class="form-group">
+        <input type="number" id="buildTime" formControlName="buildTime" class="form-control"
+          placeholder="Kısa açıklama" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="location">Lokasyon</label>
+      <div class="form-group">
+        <input type="text" id="location" formControlName="location" class="form-control" placeholder="Kısa açıklama" />
+      </div>
+    </div>
+
+    <!-- <div class="mb-3">
+  <label for="description">Açıklama</label>
+  <div class="form-group">
+      <input type="text" id="description" formControlName="description" class="form-control" placeholder="Kısa açıklama" />
+  </div>
+</div> -->
+
+    <div class="mb-3">
+      <label for="youtubeVideoLink">Youtube Video Link</label>
+      <div class="form-group">
+        <input type="text" id="youtubeVideoLink" formControlName="youtubeVideoLink" class="form-control"
+          placeholder="Kısa açıklama" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="detailDescription">Detaylı açıklama</label>
+      <div class="form-group">
+        <input type="text" id="detailDescription" formControlName="detailDescription" class="form-control"
+          placeholder="Kısa açıklama" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="city">Şehir</label>
+      <div class="form-group">
+        <input type="text" id="city" formControlName="city" class="form-control" placeholder="Kısa açıklama" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="advertCategoryId">Kategori</label>
+      <div class="form-group">
+        <select type="number" id="advertCategoryId" class="form-select" aria-label="Kategori seçimi"
+          formControlName="advertCategoryId">
+          <option value="" disabled selected>Seçiniz..</option>
+          <option *ngFor="let advertCategorys of advertCategory" [ngValue]="advertCategorys.id">
+            {{ advertCategorys.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="agentId">Emlakçı</label>
+      <div class="form-group">
+        <select type="number" id="agentId" class="form-select" aria-label="Kategori seçimi"
+          formControlName="agentId">
+          <option value="" disabled selected>Seçiniz..</option>
+          <option *ngFor="let agents of agents" [ngValue]="agents.id">
+            {{ agents.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-fill btn-info" (click)="back()">Geri dön</button>
+      <button class="btn btn-fill btn-success" (click)="advertAdd()" style="float: right">
+        Ekle
+      </button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="currentNumber == 2">
+  <ejs-richtexteditor id="defaultRTE" #exampleRTE [toolbarSettings]="tools">
+    <ng-template #valueTemplate>
+      <p>The Rich Text Editor triggers events based on its actions.</p>
+      <p>
+        The events can be used as an extension point to perform custom
+        operations.
+      </p>
+      <p class="drop-cap">
+        The European languages are members of the same family. Their separate existence is a myth.
+        For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
+        in their grammar, their pronunciation and their most common words. Everyone realizes why a
+        new common language would be desirable: one could refuse to pay expensive translators.
+      </p>
+
+
+      <p>
+        To achieve this, it would be necessary to have uniform grammar, pronunciation and more
+        common
+        words. If several languages coalesce, the grammar of the resulting language is more simple
+        and
+        regular than that of the individual languages. The new common language will be more simple
+        and
+        regular than the existing European languages. It will be as simple as Occidental; in fact,
+        it
+        will be Occidental. To an English person, it will seem like simplified English, as a
+        skeptical
+        Cambridge friend of mine told me what Occidental is.
+      </p>
+
+      <!-- BLOCKQUOTE -->
+      <blockquote class="block-quote">
+        <p>
+          It is a long established fact that a reader will be distracted by the readable content
+          of a page when looking at
+          its layout.
+        </p>
+        <cite>
+          Tom Cruise
+        </cite>
+      </blockquote>
+      <!-- END BLOCKQUOTE -->
+
+      <p>
+        Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+        there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the
+        Semantics, a large language ocean. A small river named Duden flows by their place and
+        supplies it with the necessary regelialia.
+      </p>
+
+
+
+      <!-- TAGS -->
+      <!-- <div class="blog__tags mb-4">
+        <ul class="list-inline">
+
+            <li class="list-inline-item">
+                <a href="#">
+                    #property
+                </a>
+            </li>
+
+
+            <li class="list-inline-item">
+                <a href="#">
+                    #real estate
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#">
+                    #listing
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#">
+                    #rent
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#">
+                    #sell
+                </a>
+            </li>
+        </ul>
+    </div> -->
+      <!-- END TAGS -->
+
+      <!-- AUTHOR -->
+      <!-- Profile author -->
+      <div class="wrap__profile">
+        <div class="wrap__profile-author">
+
+          <div class="wrap__profile-author-detail">
+            <div class="wrap__profile-author-detail-name">author</div>
+            <h5>jhon doe</h5>
+            <p>Hi, nice to meet you let me introduce for you, I am Jhon Doe freelancer designer
+              & web programmer from
+              indonesia,
+              base lampung</p>
+            <!-- <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <a href="#" class="btn btn-social btn-social-o facebook ">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="btn btn-social btn-social-o twitter ">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="btn btn-social btn-social-o instagram ">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="btn btn-social btn-social-o telegram ">
+                            <i class="fa fa-telegram"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="btn btn-social btn-social-o linkedin ">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </li>
+                </ul> -->
+          </div>
+        </div>
+      </div>
+      <!-- END AUTHOR -->
+
+    </ng-template>
+  </ejs-richtexteditor>
+  <form [formGroup]="blogForm">
+    <div class="mb-3">
+      <label for="header">Başlık</label>
+      <div class="form-group">
+        <input type="text" id="header" formControlName="header" class="form-control" placeholder="Başlık" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="shortText">Kısa açıklama</label>
+      <div class="form-group">
+        <input type="text" id="shortText" formControlName="shortText" class="form-control"
+          placeholder="Kısa açıklama" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="colorId">Kategori</label>
+      <div class="form-group">
+        <select type="number" id="colorId" class="form-select" aria-label="Kategori seçimi"
+          formControlName="categoryId">
+          <option value="" disabled selected>Seçiniz..</option>
+          <option *ngFor="let categorys of category" [ngValue]="categorys.id">
+            {{ categorys.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <button class="btn btn-fill btn-info" (click)="back()">Geri dön</button>
+      <button class="btn btn-fill btn-success" (click)="add()" (click)="getFormattedContent()" style="float: right">
+        Ekle
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,131 @@
+<div class="one" >a</div>
+
+<ejs-richtexteditor id="defaultRTE" #test [toolbarSettings]="tools">
+  <ng-template  #valueTemplate>
+    <p >Güncelliyeceğiniz bilgileri eskileri ile beraber buraya yazınız</p>
+    
+  </ng-template>
+</ejs-richtexteditor>
+<form [formGroup]="advertForm">
+
+    <div class="mb-3">
+      <label for="title">Başlık</label>
+      <div class="form-group">
+          <input type="text" id="title" formControlName="title" class="form-control" placeholder="Başlık" />
+      </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="shortDescription">Kısa açıklama</label>
+    <div class="form-group">
+        <input type="text" id="shortDescription" formControlName="shortDescription" class="form-control" placeholder="Kısa açıklama" />
+    </div>
+</div>
+
+<div class="mb-3">
+  <label for="price">Fiyat</label>
+  <div class="form-group">
+      <input type="number" id="price" formControlName="price" class="form-control" placeholder="Kısa açıklama" />
+  </div>
+</div>
+
+<div class="mb-3">
+<label for="buildTime">Yapım tarihi</label>
+<div class="form-group">
+    <input type="number" id="buildTime" formControlName="buildTime" class="form-control" placeholder="Kısa açıklama" />
+</div>
+</div>
+
+<div class="mb-3">
+<label for="location">Lokasyon</label>
+<div class="form-group">
+    <input type="text" id="location" formControlName="location" class="form-control" placeholder="Kısa açıklama" />
+</div>
+</div>
+
+<div class="mb-3">
+<label for="description">Açıklama</label>
+<div class="form-group">
+    <input type="text" id="description" formControlName="description" class="form-control" placeholder="Kısa açıklama" />
+</div>
+</div>
+
+<div class="mb-3">
+<label for="youtubeVideoLink">Youtube Video Link</label>
+<div class="form-group">
+    <input type="text" id="youtubeVideoLink" formControlName="youtubeVideoLink" class="form-control" placeholder="Kısa açıklama" />
+</div>
+</div>
+
+<div class="mb-3">
+<label for="detailDescription">Detaylı açıklama</label>
+<div class="form-group">
+    <input type="text" id="detailDescription" formControlName="detailDescription" class="form-control" placeholder="Kısa açıklama" />
+</div>
+</div>
+
+<div class="mb-3">
+<label for="city">Şehir</label>
+<div class="form-group">
+    <input type="text" id="city" formControlName="city" class="form-control" placeholder="Kısa açıklama" />
+</div>
+</div>
+
+  
+
+  
+  <div class="mb-3">
+    <label for="advertCategoryId">Kategori</label>
+    <div class="form-group">
+        <select type="number" id="advertCategoryId" class="form-select" aria-label="Kategori seçimi" formControlName="advertCategoryId">
+            <option value="" disabled selected>Seçiniz..</option>
+            <option *ngFor="let advertCategorys of advertCategory" [ngValue]="advertCategorys.id">{{advertCategorys.name}}</option>
+          </select>
+    </div>
+</div>
+
+  <div class="card-footer">
+    <button class="btn btn-fill btn-info" (click)="back()">Geri dön</button>
+    <button class="btn btn-fill btn-success"  (click)="advertUpdate()"  style="float: right;">Güncelle</button>
+</div>
+  </form>
+
+
+
+
+  <h3 *ngIf="advert.images[0]" style="text-align:center;">Emlak Resmi
+    <div class="card__image-header " style="margin-top: 30px">
+        <img
+          [src]="baseImageUrl + advert.images[0]"
+          alt=""
+          class="img-fluid  img-transition"
+          style="width: 50%; height: 50%;"
+        />
+        <div class="card-footer">
+            <button class="btn btn-danger btn-danger" (click)="deleteAdvertImage()" style="float: right;">Emlak Resmini Sil</button>
+        </div>
+      </div>
+    </h3>
+
+  
+<div class="card shadow p-3 mb-5 bg-body rounded" style="margin-top: 30px">
+<div class="card-body">
+    <div class="card-title">
+        <h1 class="display-3">Emlağa Resim Ekle</h1>
+        <h4>Emlağa 1'den fazla resim ekliyemezsiniz</h4>
+    </div>
+    <div class="text-center mb-3">
+        <input class="form-control" type="file" (change)="onChange($event)">
+    </div>
+    <div class="container" *ngIf="loading">
+        <h3>Loading ...</h3>
+    </div>
+
+    <div class="card-footer">
+        <button (click)="onUpload()" class="btn btn-outline-dark float-end">
+            Upload
+        </button>
+    </div>
+
+</div>
+</div>

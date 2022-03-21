@@ -1,0 +1,113 @@
+<div class="one" [innerHtml]="htmlToAdd"></div>
+
+<ejs-richtexteditor id="defaultRTE" #exampleRTE [toolbarSettings]="tools">
+  <ng-template  #valueTemplate>
+    <p >Güncelliyeceğiniz bilgileri eskileri ile beraber buraya yazınız</p>
+    
+  </ng-template>
+</ejs-richtexteditor>
+<h4>Blog yazılarınız alt tarafta bulunmaktadır isteğinize göre istediğiniz şeyleri alt kutudan kopyalayıp üst tarafa yazabilirsiniz </h4>
+<div  id="myInput" style="background-color: lightgrey;
+border: 15px solid rgb(167, 167, 167);
+padding: 50px;
+margin: 20px;" class="one" [innerHtml]="htmlContent"></div>
+
+<form [formGroup]="blogForm">
+  <div class="mb-3">
+    <label for="header">Başlık</label>
+
+    <div class="form-group">
+      <input
+        type="text"
+        id="header"
+        formControlName="header"
+        class="form-control"
+        placeholder="Başlık"
+      />
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="shortText">Kısa açıklama</label>
+    <div class="form-group">
+      <input
+        type="text"
+        id="shortText"
+        formControlName="shortText"
+        class="form-control"
+        placeholder="Kısa açıklama"
+      />
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="colorId">Kategori</label>
+    <div class="form-group">
+      <select
+        type="number"
+        id="colorId"
+        class="form-select"
+        aria-label="Kategori seçimi"
+        formControlName="categoryId"
+      >
+        <option value="" disabled selected>Seçiniz..</option>
+        <option *ngFor="let categorys of category" [ngValue]="categorys.id">
+          {{ categorys.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <button class="btn btn-fill btn-info" (click)="back()">Geri dön</button>
+    <button
+      class="btn btn-fill btn-success"
+      (click)="add()"
+      (click)="getFormattedContent()"
+      style="float: right"
+    >
+      Güncelle
+    </button>
+  </div>
+</form>
+<h3 *ngIf="blog.images[0]" style="text-align: center">
+  Blog Resmi
+  <div class="card__image-header" style="margin-top: 30px">
+    <img
+      [src]="baseImageUrl + blog.images[0]"
+      alt=""
+      class="img-fluid img-transition"
+      style="width: 50%; height: 50%"
+    />
+    <div class="card-footer">
+      <button
+        class="btn btn-danger btn-danger"
+        (click)="deleteBlogImage()"
+        style="float: right"
+      >
+        Blog Resmini Sil
+      </button>
+    </div>
+  </div>
+</h3>
+
+<div class="card shadow p-3 mb-5 bg-body rounded" style="margin-top: 30px">
+  <div class="card-body">
+    <div class="card-title">
+      <h1 class="display-3">Bloga Resim Ekle</h1>
+      <h4>Bloga 1'den fazla resim ekliyemezsiniz</h4>
+    </div>
+    <div class="text-center mb-3">
+      <input class="form-control" type="file" (change)="onChange($event)" />
+    </div>
+    <div class="container" *ngIf="loading">
+      <h3>Loading ...</h3>
+    </div>
+
+    <div class="card-footer">
+      <button (click)="onUpload()" class="btn btn-outline-dark float-end">
+        Upload
+      </button>
+    </div>
+  </div>
+</div>
